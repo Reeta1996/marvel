@@ -47,21 +47,13 @@
                         
                         <ul id="c1" class="collapse mt-2 list-unstyled pl-4 show" aria-labelledby="c1"
                           data-parent="#accordionExample">
-                         {{--@foreach ( $categories as  $category )
+                         @foreach ( $categories as  $category )
                           <li>
                             <a href="{{route('dashboard.index','category'.$category->id)}}"
                                class="@if($category->id==22) {{' text-default active'}} @else {{' text-default'}} @endif">{{$category->name}}</a>
-                          </li>--}}
-                          <li>
-                            <a href="javascript:void(0)" class="text-default active">T-shirts</a>
                           </li>
-                          <li>
-                            <a href="javascript:void(0)" class="text-default">Shirts</a>
-                          </li>
-                          <li>
-                            <a href="javascript:void(0)" class="text-default">Jeans</a>
-                          </li>
-                          {{--@endforeach--}}
+                         
+                          @endforeach
                         </ul>
                       </div>
                     </div>
@@ -161,8 +153,10 @@
                       </div>
                       <div class="search-box mr-2">
                         <div class="position-relative">
-                          <input type="text" placeholder="Search..." class="form-control form-control-sm">
+                          <form>
+                          <input type="text" name="search" value="{{$search}}" placeholder="Search..." class="form-control form-control-sm">
                           <i class="bx bx-search icon"></i>
+                         </form>
                         </div>
                       </div>
                       <ul class="nav nav-pills product-view-nav">
@@ -216,33 +210,28 @@
               </div>
               <!-- end row -->
 
-              <div class="row">
-                <div class="col-lg-12">
-                  <ul class="pagination flat-rounded-pagination justify-content-center mt-4 mb-5">
-                    <li class="page-item disabled">
-                      <a href="#" class="page-link" data-effect="wave"><i class="mdi mdi-chevron-left"></i></a>
+             <!-- pagination -->
+             <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="pagination flat-rounded-pagination justify-content-center mt-4 mb-5">
+                      <li class= "@if($products->currentPage() >1) {{'page-link'}} @else {{'page-item disabled'}} @endif" >
+                        <a href="{{$products->previousPageUrl()}}" class="page-link" data-effect="wave"><i class="mdi mdi-chevron-left"></i></a>
+                      </li>
+                      
+                      @for($i = 1;$i<=$products->lastPage();$i++)
+                      <li class= "@if($products->currentPage() == $i) {{'page-item active'}} @else {{'page-item '}} @endif" >
+                      <a href="{{$products->Url($i)}}" class="page-link" data-effect="wave">{{$i}}</a>
                     </li>
-                    <li class="page-item">
-                      <a href="#" class="page-link" data-effect="wave">1</a>
+                    @endfor
+                    <li class="@if($products->currentPage()<$products->lastPage()) {{'page-item'}} @else {{'page-item disabled'}} @endif ">
+                      <a href="{{$products->nextPageUrl()}}" class="page-link" data-effect="wave"><i class="mdi mdi-chevron-right"></i></a>
                     </li>
-                    <li class="page-item active">
-                      <a href="#" class="page-link" data-effect="wave">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a href="#" class="page-link" data-effect="wave">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a href="#" class="page-link" data-effect="wave">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a href="#" class="page-link" data-effect="wave">5</a>
-                    </li>
-                    <li class="page-item">
-                      <a href="#" class="page-link" data-effect="wave"><i class="mdi mdi-chevron-right"></i></a>
-                    </li>
-                  </ul>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+                <!-- pagination End -->
+
+
             </div>
           </div>
           <!-- end row -->

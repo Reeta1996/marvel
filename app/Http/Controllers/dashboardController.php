@@ -12,23 +12,23 @@ use App\Models\Category;
 
 class dashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $products = Products::all();
-        //$categories = Category::where('status',1)->get();
+        $categories = Category::where('status',1)->get();
 
-       // $search = '';
+        $search = '';
        
-       //if($request->has("search") && $request->search != ''){
-       // $search = $request->search;
-       // $products = Products::where('product_name','=',$search)->paginate(5);
-      //}
-      //else
-       //   {
-            //    $products = Products::with('categories')->paginate(5);
-         // }
-        return view('dashboard.index',compact('user','products'));
+       if($request->has("search") && $request->search != ''){
+       $search = $request->search;
+        $products = Products::where('product_name','=',$search)->paginate(5);
+      }
+      else
+          {
+            $products = Products::with('categories')->paginate(5);
+          }
+        return view('dashboard.index',compact('user','products', 'categories', 'search'));
     } 
     
     public function details($id)

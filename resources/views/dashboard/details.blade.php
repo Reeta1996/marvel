@@ -104,7 +104,7 @@
               </div>
               <div class="col-xl-6">
                 <div class="mt-4 mt-xl-3">
-                  <a href="#" class="text-primary">{{$product->category}}</a>
+                  <a href="#" class="text-primary">@foreach ($product->categories as $category) {{$category->name .',' }} @endforeach</a>
                   <h4 class="mt-1 mb-3 font-weight-600">{{$product->product_name}}</h4>
 
                   <p class="text-muted float-left mr-3">
@@ -194,7 +194,7 @@
                       <tbody>
                         <tr>
                           <td class="bg-light">Category</td>
-                          <td>{{$product->category}}</td>
+                          <td>@foreach ($product->categories as $category) {{$category->name .',' }} @endforeach</td>
                         </tr>
                         <tr>
                           <td class="bg-light">Brand</td>
