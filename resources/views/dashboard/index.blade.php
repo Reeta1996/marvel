@@ -49,8 +49,8 @@
                           data-parent="#accordionExample">
                          @foreach ( $categories as  $category )
                           <li>
-                            <a href="{{route('dashboard.index','category'.$category->id)}}"
-                               class="@if($category->id==22) {{' text-default active'}} @else {{' text-default'}} @endif">{{$category->name}}</a>
+                            <a href="{{route('dashboard.index','category_id='.$category->id)}}"
+                               class="@if($category->id==$category_id) {{' text-default active'}} @else {{' text-default'}} @endif">{{$category->name}}</a>
                           </li>
                          
                           @endforeach
